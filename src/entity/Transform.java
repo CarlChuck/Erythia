@@ -7,8 +7,7 @@ import org.joml.Vector3f;
 
 
 
-
-public class Transform {		
+public class Transform {
 	public Vector3f pos;
 	public Vector3f scale;
 	public float angle;
@@ -24,6 +23,7 @@ public class Transform {
 		target.scale(scale);
 		target.translate(pos);
 		target.rotateZ(-angle);
+
 
 		return target;
 	}

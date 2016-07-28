@@ -7,7 +7,8 @@ import main.Camera;
 import main.Shader;
 import main.Window;
 
-	public class World {
+
+public class World {
 		static final int view = 24;
 		private static byte[] tiles;
 		private static int width;
@@ -34,8 +35,10 @@ import main.Window;
 			for(int i = 0; i < view; i++) {
 				for(int j = 0; j < view; j++) {
 					Tile t = getTile(i-posX, j+posY);
-					if(t != null)
-						render.renderTile(t, i-posX, -j-posY, shader, world, cam);
+					if(t != null) {
+						render.renderTile(t, i - posX, -j - posY, shader, world, cam);
+					}
+
 				}
 			}
 			
@@ -61,12 +64,14 @@ import main.Window;
 		public void setTile(Tile tile, int x, int y) {
 			tiles[x + y * width] = tile.getId();
 		}
+
 		public static Tile getTile(int x, int y) {
 			try {
 				return Tile.tiles[tiles[x + y * width]];
 			}catch(ArrayIndexOutOfBoundsException e) {
 				return null;
 			}
+
 		}
 
 		public int getScale() { 

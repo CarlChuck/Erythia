@@ -2,13 +2,9 @@ package world;
 
 import java.util.HashMap;
 
+import main.*;
 import org.joml.Matrix4f;
 import org.joml.Vector3f;
-
-import main.Camera;
-import main.Model;
-import main.Shader;
-import main.Texture;
 
 public class TileRenderer {
 	private HashMap<String, Texture> tileTextures;
@@ -48,19 +44,21 @@ public class TileRenderer {
 	}
 	
 	public void renderTile(Tile tile, int x, int y, Shader shader, Matrix4f world, Camera cam) {
+
 		shader.bind();
 		if(tileTextures.containsKey(tile.getTexture()))
 			tileTextures.get(tile.getTexture()).bind(0);
-		
-		Matrix4f tile_pos = new Matrix4f().translate(new Vector3f(x*2, y*2, 0));
+
+		Matrix4f tilePos = new Matrix4f().translate(new Vector3f(x*2, y*2, 0));
 		Matrix4f target = new Matrix4f();
 		
 		cam.getProjection().mul(world, target);
-		target.mul(tile_pos);
+		target.mul(tilePos);
 		
 		shader.setUniform("sampler", 0);
 		shader.setUniform("projection", target);
-		
+
 		model.render();
+
 	}
 }

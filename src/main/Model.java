@@ -16,7 +16,8 @@ public class Model {
 	
 	private int iId;
 	
-	public Model(float[] vertices, float[] tex_coords, int[] indices) {
+	public Model(float[] vertices, float[] texCoords, int[] indices) {
+
 		draw_count = indices.length;
 		
 		vId = glGenBuffers();
@@ -25,7 +26,7 @@ public class Model {
 		
 		tId = glGenBuffers();
 		glBindBuffer(GL_ARRAY_BUFFER, tId);
-		glBufferData(GL_ARRAY_BUFFER, createBuffer(tex_coords), GL_STATIC_DRAW);
+		glBufferData(GL_ARRAY_BUFFER, createBuffer(texCoords), GL_STATIC_DRAW);
 		
 		iId = glGenBuffers();
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, iId);
@@ -38,16 +39,19 @@ public class Model {
 
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
-	}
 
+	}
+	
+//TODO Model - Revise finalize later
 	protected void finalize() throws Throwable {
 		glDeleteBuffers(vId);
 		glDeleteBuffers(tId);
 		glDeleteBuffers(iId);
 		super.finalize();
 	}
-	
+
 	public void render() {
+
 		glEnableVertexAttribArray(0);
 		glEnableVertexAttribArray(1);
 
@@ -65,7 +69,7 @@ public class Model {
 
 		glDisableVertexAttribArray(0);
 		glDisableVertexAttribArray(1);
-		
+
 	}
 	
 	private FloatBuffer createBuffer(float[] data) {

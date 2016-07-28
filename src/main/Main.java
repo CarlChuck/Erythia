@@ -6,7 +6,6 @@ import static org.lwjgl.opengl.GL11.*;
 import org.lwjgl.opengl.GL;
 
 import entity.Player;
-import world.Tile;
 import world.TileRenderer;
 import world.World;
 import world.WorldMap;
@@ -103,3 +102,5 @@ public class Main {
 	}
 
 }
+
+
