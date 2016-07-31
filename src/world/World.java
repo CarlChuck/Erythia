@@ -20,7 +20,7 @@ public class World {
 		public World() {
 			width = WorldMap.WORLD_WIDTH;
 			height = WorldMap.WORLD_HEIGHT;
-			scale = 32;
+			scale = 64;
 			
 			tiles = new byte[width * height];
 			
@@ -29,8 +29,8 @@ public class World {
 		}
 		
 		public void render(TileRenderer render, Shader shader, Camera cam, Window window) {
-			int posX = ((int)cam.getPosition().x + (window.getWidth()/2)) / (scale * 2);
-			int posY = ((int)cam.getPosition().y - (window.getHeight()/2)) / (scale * 2);
+			int posX = ((int)cam.getPosition().x + (window.getWidth()/2)) / (scale);
+			int posY = ((int)cam.getPosition().y - (window.getHeight()/2)) / (scale);
 			
 			for(int i = 0; i < view; i++) {
 				for(int j = 0; j < view; j++) {
@@ -47,8 +47,8 @@ public class World {
 		public void correctCamera(Camera camera, Window window) {
 			Vector3f pos = camera.getPosition();
 			
-			int w = -width * scale * 2;
-			int h = height * scale * 2;
+			int w = -width * scale;
+			int h = height * scale;
 			
 			if(pos.x > -(window.getWidth()/2)+scale) 
 				pos.x = -(window.getWidth()/2)+scale;

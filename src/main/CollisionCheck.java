@@ -9,10 +9,12 @@ import world.World;
  */
 public class CollisionCheck{
 
+
+
     public static boolean hasCollided(int x, int y){
         Tile tile = World.getTile(x, -y);
         if (tile.isSolid() == true){
-            System.out.println("X: " + x+ "Y: " + y);
+            System.out.println("X: " + x + " Y: " + y );
             return true;
         }
 

@@ -14,9 +14,9 @@ public class TileRenderer {
 		tileTextures = new HashMap<String, Texture>();
 		float[] vertices = new float[] {
 				-1f, 1f, 0, //TOP LEFT     0
-				1f, 1f, 0,  //TOP RIGHT    1
-				1f, -1f, 0, //BOTTOM RIGHT 2
-				-1f, -1f, 0,//BOTTOM LEFT  3
+				0, 1f, 0,  //TOP RIGHT    1
+				0, 0, 0, //BOTTOM RIGHT 2
+				-1f, 0, 0,//BOTTOM LEFT  3
 		};
 		
 		float[] texture = new float[] {
@@ -49,7 +49,7 @@ public class TileRenderer {
 		if(tileTextures.containsKey(tile.getTexture()))
 			tileTextures.get(tile.getTexture()).bind(0);
 
-		Matrix4f tilePos = new Matrix4f().translate(new Vector3f(x*2, y*2, 0));
+		Matrix4f tilePos = new Matrix4f().translate(new Vector3f(x, y, 0));
 		Matrix4f target = new Matrix4f();
 		
 		cam.getProjection().mul(world, target);

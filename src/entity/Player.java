@@ -11,6 +11,7 @@ import main.Window;
 import org.joml.Vector3f;
 
 
+import world.Tile;
 import world.World;
 
 import java.awt.*;
@@ -19,18 +20,20 @@ public class Player {
 	private Model model;
 	private Animation texture;
 	private Transform transform;
-	private float speed = 1.0f;
+	private float speed = 0.5f;
 	double angle = 0;
-	float locX = 8;
-	float locY = -8;
+	float locX = 4;
+	float locY = -4;
+	float locXa = locX+0.5f;
+	float locYa = locY-0.5f;
 
 
 	public Player() {
 		float[] vertices = new float[] {
-				-1f, 1f, 0, //TOP LEFT     0
-				1f, 1f, 0,  //TOP RIGHT    1
-				1f, -1f, 0, //BOTTOM RIGHT 2
-				-1f, -1f, 0,//BOTTOM LEFT  3
+				-0.5f, 0.5f, 0, //TOP LEFT     0
+				0.5f, 0.5f, 0,  //TOP RIGHT    1
+				0.5f, -0.5f, 0, //BOTTOM RIGHT 2
+				-0.5f, -0.5f, 0,//BOTTOM LEFT  3
 		};
 		
 		float[] texture = new float[] {
@@ -51,7 +54,8 @@ public class Player {
 		
 		transform = new Transform();
 		transform.pos.add(new Vector3f(locX, locY,0));
-		transform.scale = new Vector3f(32,32,1);
+		transform.scale = new Vector3f(64,64,1);
+
 	}
 	
 	public void update(float delta, Window window, Camera camera, World world) {
@@ -94,7 +98,8 @@ public class Player {
 		camera.setPosition(transform.pos.mul(-world.getScale(), new Vector3f()));
 
 //		System.out.println("X:" + locX + " Y:" + locY);
-		CollisionCheck.hasCollided((int)locX, (int)locY);
+		collision((int)locX, (int)locY);
+
 
 	}
 
@@ -102,6 +107,17 @@ public class Player {
 		return new Rectangle((int)locX, (int)locY, 32, 32);
 	}
 
+	public void collision(int x, int y){
+		if (CollisionCheck.hasCollided(x, y)== true) {
+			Tile tile = World.getTile(x, y);
+			float tileX = x / 2;
+			float tileY = y / 2;
+			float tileXa = tileX + 1;
+			float tileYa = tileY + 1;
+
+		}
+
+	}
 
 	
 	public void render(Shader shader, Camera camera){
